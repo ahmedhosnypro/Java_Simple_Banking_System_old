@@ -17,11 +17,45 @@ public class AccountData {
     private static String createCardNumber() {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
+        ArrayList<Integer> array = new ArrayList<>();
+        array.add(4);
+        for (int i = 0; i < 5; i++) {
+            array.add(0);
+        }
         sb.append(400000);
 
-        for (int i = 0; i < 10; i++) {
-            sb.append(random.nextInt(9));
+        for (int i = 0; i < 9; i++) {
+            int n = random.nextInt(9);
+            sb.append(n);
+            array.add(n);
         }
+
+        for (int i = 0; i < 16; i += 2) {
+            array.set(i, array.get(i) * 2);
+        }
+
+        int sum = 0;
+
+        for (int i = 0; i < 15; i++) {
+            int tmp = array.get(i);
+            if (tmp > 9) {
+                sum += tmp - 9;
+            } else {
+                sum += tmp;
+            }
+
+        }
+
+        int remainder = sum % 10;
+        int checkSum;
+        if (remainder != 0) {
+            checkSum = 10 - remainder;
+        } else {
+            checkSum = remainder;
+        }
+
+
+        sb.append(checkSum);
 
         if (getAccCardNums().contains(sb.toString())) {
             return createCardNumber();

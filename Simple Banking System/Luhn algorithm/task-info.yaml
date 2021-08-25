@@ -291,6 +291,201 @@ files:
         }
     }
   learner_created: false
+- name: src/banking/Account.java
+  visible: true
+  text: |
+    package banking;
+
+    import java.util.Random;
+
+    public class Account {
+        private final String cardNumber;
+        private final String pin;
+        private final long balance;
+
+        public Account(String cardNumber) {
+            this.cardNumber = cardNumber;
+            pin = createPin();
+            balance = 0;
+        }
+
+        public String getCardNumber() {
+            return cardNumber;
+        }
+
+
+        private static String createPin() {
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                sb.append(random.nextInt(9));
+            }
+            return sb.toString();
+        }
+
+        public String getPin() {
+            return pin;
+        }
+
+        public long getBalance() {
+            return balance;
+        }
+
+    //    public void setPin(int pin) {
+    //        this.pin = pin;
+    //    }
+    //
+    //    public void setBalance(long balance) {
+    //        this.balance = balance;
+    //    }
+    }
+  learner_created: true
+- name: src/banking/Menu.java
+  visible: true
+  text: |
+    package banking;
+
+    import java.util.Objects;
+    import java.util.Scanner;
+
+    public class Menu {
+        private Account account;
+
+        static Scanner scanner = new Scanner(System.in);
+
+        public void mainMenu() {
+
+            System.out.println("1. Create an account\n" +
+                    "2. Log into account\n" +
+                    "0. Exit");
+
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    createAccount();
+                    break;
+                case "2":
+                    logIn();
+                    break;
+                case "0":
+                    System.out.println("\nBye!");
+                    break;
+                default:
+                    System.out.println("Invalid");
+                    break;
+            }
+        }
+
+        private void createAccount() {
+            account = AccountData.addAccount();
+            System.out.println("\nYour card has been created\n" +
+                    "Your card number:\n" +
+                    account.getCardNumber() + "\n" +
+                    "Your card PIN:\n" +
+                    account.getPin() + "\n");
+            mainMenu();
+        }
+
+        public void accountInfoMenu() {
+            System.out.println("1. Balance\n" +
+                    "2. Log out\n" +
+                    "0. Exit");
+
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    System.out.println("\nBalance: " + account.getBalance() + "\n");
+                    accountInfoMenu();
+                    break;
+                case "2":
+                    logOut();
+                    break;
+                case "0":
+                    break;
+                default:
+                    System.out.println("Invalid");
+                    break;
+            }
+        }
+
+        private void logIn() {
+            System.out.println("\nEnter your card number:");
+            String cardNum = scanner.nextLine();
+            System.out.println("Enter your PIN:");
+
+            if (cardNum.length() == 16) {
+                String pin = scanner.nextLine();
+                if (AccountData.getAccCardNums().contains(cardNum)) {
+                    Account account = AccountData.getAccounts().get(cardNum);
+                    if (Objects.equals(pin, account.getPin())) {
+                        this.account = account;
+                        System.out.println("\nYou have successfully logged in!\n");
+                        accountInfoMenu();
+                    } else {
+                        System.out.println("\nWrong card number or PIN!\n");
+                        mainMenu();
+                    }
+                }
+            } else {
+                System.out.println("\nWrong card number!\n");
+                mainMenu();
+            }
+        }
+
+        private void logOut() {
+            this.account = null;
+            System.out.println("\nYou have successfully logged out!\n");
+            mainMenu();
+        }
+    }
+  learner_created: true
+- name: src/banking/AccountData.java
+  visible: true
+  text: |
+    package banking;
+
+    import java.util.*;
+
+    public class AccountData {
+        private static final HashMap<String, Account> accounts = new HashMap<>();
+        private static final ArrayList<String> accCardNums = new ArrayList<>();
+
+        public static Account addAccount() {
+            String cardNumber = createCardNumber();
+            accounts.put(cardNumber, new Account(cardNumber));
+            accCardNums.add(cardNumber);
+
+            return accounts.get(cardNumber);
+        }
+
+        private static String createCardNumber() {
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+            sb.append(400000);
+
+            for (int i = 0; i < 10; i++) {
+                sb.append(random.nextInt(9));
+            }
+
+            if (getAccCardNums().contains(sb.toString())) {
+                return createCardNumber();
+            }
+
+            return sb.toString();
+        }
+
+        public static HashMap<String, Account> getAccounts() {
+            return accounts;
+        }
+
+        public static ArrayList<String> getAccCardNums() {
+            return accCardNums;
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/516/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 25 Aug 2021 00:49:44 UTC
 record: -1

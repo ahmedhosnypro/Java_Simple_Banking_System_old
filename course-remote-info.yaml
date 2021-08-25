@@ -3,14 +3,14 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/295560/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Tue, 24 Aug 2021 12:47:12 UTC
+update_date: Tue, 24 Aug 2021 23:45:02 UTC
 stages:
 - id: 515
   step: 8425
   is_completed: true
 - id: 516
   step: 8426
-  is_completed: false
+  is_completed: true
 - id: 517
   step: 8427
   is_completed: false
@@ -99,44 +99,6 @@ topics:
     theory_id: 3594
   - title: String
     theory_id: 3523
-  - title: IntelliJ IDEA
-    theory_id: 3801
-  - title: IDEA Basics
-    theory_id: 5819
-  - title: EduTools
-    theory_id: 5839
-  - title: Command line overview
-    theory_id: 8977
-  - title: Parameters and options
-    theory_id: 9746
-  - title: Errors in programs
-    theory_id: 3536
-  - title: What is an exception
-    theory_id: 3497
-  - title: Hierarchy of exceptions
-    theory_id: 3570
-  - title: Exception handling
-    theory_id: 3552
-  - title: Running programs on your computer
-    theory_id: 3746
-  - title: Random
-    theory_id: 4910
-  - title: Defining classes
-    theory_id: 3618
-  - title: Constructor
-    theory_id: 3535
-  - title: Instance methods
-    theory_id: 3495
-  - title: Package
-    theory_id: 3621
-  - title: Access modifiers
-    theory_id: 3589
-  - title: Getters and setters
-    theory_id: 3599
-  - title: Inheritance
-    theory_id: 3583
-  - title: Objects
-    theory_id: 4727
   1:
   - title: Command-line arguments
     theory_id: 3566
